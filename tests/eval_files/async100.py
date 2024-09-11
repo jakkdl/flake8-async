@@ -121,3 +121,9 @@ async def more_nested_tests():
 async def foo():
     with trio.fail_after(1):
         yield
+
+
+async def nursery_no_cancel_point():
+    with trio.CancelScope():  # error: 9, "trio", "CancelScope"
+        async with anyio.create_task_group():
+            ...
